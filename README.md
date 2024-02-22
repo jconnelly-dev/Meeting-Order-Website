@@ -39,6 +39,7 @@ till next time, see ya :grin:!
 ### Backend
 - ASP.NET Core 8 Razor Pages Web Application
 - Heroku Basic Dyno
+- Heroku .NET Core Buildpack [GitHub](https://github.com/jincod/dotnetcore-buildpack)
 
 ### Frontend
 - JavaScript
