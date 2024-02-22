@@ -17,17 +17,20 @@
 Hi, :wave: I'm Joey and welcome to my GitHub repo for my Meeting Web App project!
 
 
-I'm a Software Engineer and, once upon a time the small group I work with grew in size. 
-When it did, we need a fair way of picking the order in which developers spoke in our Scrum meetings. 
+I'm a Software Engineer and once upon a time the small group of people I work with grew in size. 
+When it did, we needed a fair way of picking the order in which developers spoke during our Scrum meetings. 
 To quickly fix the problem at hand I remember writing a ~10 line console app that did the job. 
-However, now that we've used it for so long others need access - and more so - the delivery and management of updates to the list should be standardized. 
+However, as our team size continues to change, the delivery and management of updates to the list of names should be standardized. 
 So this project is to serve that purpose.
 
 
 This project is a simple web site that displays a randomized order foreach member on the team. 
-It randomizes the order based on the current day as the seed, so every day it automatically creates a new order if the site is accessed. 
-I'm going to be hosting this web site on Heroku (because it's free) and will be setting up automatic CI/CD deploys to their cloud everytime I push to master. 
-I would like to attempt to setup an RSS feed so that our Microsoft Teams chat can display this info in a chat message when we begin our meeting.
+It randomizes the order based on the current day (used as the seed), so any day the site is accessed it will provide a new random order.
+I'm going to be hosting this web site on my personal Heroku account (because it's free). 
+Within Heroku I will also be setting up automatic CI/CD deployments to their cloud everytime I push to master. 
+I would like to attempt to setup an RSS feed so that our Microsoft Teams chat can display this info in a chat message when we begin our meeting. 
+But if not, a public site still solves the new problem at hand...
+till next time, see ya :grin:!
 <br>
 <br>
 
