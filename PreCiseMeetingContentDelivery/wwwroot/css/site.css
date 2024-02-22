@@ -1,0 +1,103 @@
+/**
+ * Author: Joseph Connelly - the realist, the illist
+ * Project: RSS Content Delivery Web Application
+ * Backend: ASP.NET Core 8 Razor Page web app
+ * Frontend: JavaScript, CSS, HTML
+ * Date: Feburary 2024
+ */
+
+:root {
+    --precise-darkblue: #003865;
+    --precise-blue: #003866;
+    --precise-lightblue: #73B2E6;
+    --precise-darkgreen: #67812B;
+    --precise-green: #97D700;
+    --precise-lightgreen: #96D600;
+    --precise-white: #FFFFFF;
+}
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse farthest-corner at center top, var(--precise-green) 0%, var(--precise-blue) 100%);
+    background: var(--precise-darkblue);
+}
+
+footer {
+    color: var(--precise-white);
+    background: linear-gradient(to bottom, var(--precise-lightblue), var(--precise-blue));
+    /*background: linear-gradient(to bottom, var(--precise-lightgreen), var(--precise-darkgreen));*/
+    box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+    border-radius: 10px;
+    position: absolute;
+    left: 2rem;
+    bottom: 2rem;
+    padding: 1rem 2rem 1rem;
+}
+
+.meeting-board {
+    color: var(--precise-white);
+    background: linear-gradient(to bottom, var(--precise-lightblue), var(--precise-blue));
+    box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
+    border-radius: 10px;
+    padding: 2em 3em 1em;
+}
+
+.meeting-header {
+    font-size: 1.75em;
+}
+
+.meeting-date {
+    font-size: 0.75em;
+}
+
+svg {
+    top: 3px;
+    width: 25px;
+    height: 26px;
+    position: relative;
+    vertical-align: baseline;
+    margin-right: 6px;
+}
+
+.attendees ul {
+    padding: 1em 0em 1em;
+    position: relative;
+}
+
+.meeting-board ul li {
+    list-style: none;
+    font-size: 1em;
+    padding: 0.1em;
+}
+
+.meeting-board ul li span {
+    font-family: "DM Mono", monospace;
+    font-size: 0.6em;
+    font-weight: 600;
+    transform: translateY(-2px);
+    background: var(--precise-green);
+    color: var(--precise-white);
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+}
