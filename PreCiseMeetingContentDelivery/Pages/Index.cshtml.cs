@@ -18,7 +18,7 @@ namespace PreCiseMeetingContentDelivery.Pages
         #endregion
 
         #region Private Members
-        private const string MEETING_TIMEZONE = "Mountain Standard Time";
+        private const string MEETING_TIMEZONE = "US:Mountain";
         private static readonly string[] _names =
         [
             "andrew becklund",
@@ -54,7 +54,7 @@ namespace PreCiseMeetingContentDelivery.Pages
             TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MEETING_TIMEZONE);
             LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingTimeZone);
             DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingTimeZone);
-            TimeZoneStandardName = meetingTimeZone.IsDaylightSavingTime(DayOfMeeting)
+            TimeZoneStandardName = DayOfMeeting.IsDaylightSavingTime()
                 ? meetingTimeZone.DaylightName
                 : meetingTimeZone.StandardName;
 
