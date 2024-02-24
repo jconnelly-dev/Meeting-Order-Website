@@ -12,6 +12,7 @@ namespace PreCiseMeetingContentDelivery.Pages
     {
         #region Properties
         public List<string> MemberOrder { get; private set; } = [];
+        public string TimeZoneStandardName { get; private set; } = string.Empty;
         public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
         public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
         #endregion
@@ -50,10 +51,12 @@ namespace PreCiseMeetingContentDelivery.Pages
         public void OnGet()
         {
             DateTime updateOrderOnUtc = DateTime.UtcNow;
-            TimeZoneInfo meetingLocationTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MEETING_TIMEZONE);
-
-            LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingLocationTimeZone);
-            DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingLocationTimeZone);
+            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MEETING_TIMEZONE);
+            TimeZoneStandardName = meetingTimeZone.IsDaylightSavingTime(updateOrderOnUtc) 
+                ? meetingTimeZone.DaylightName
+                : meetingTimeZone.StandardName;
+            LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingTimeZone);
+            DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingTimeZone);
 
             // Creating separation from page content to aid in future testing.
             MemberOrder = Randomizer.RandomizeOrder(_names, DayOfMeeting);

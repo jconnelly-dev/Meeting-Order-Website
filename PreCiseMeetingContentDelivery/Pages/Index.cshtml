@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "RSS Content Source";
     ViewData["DayOfMeeting"] = ViewData.Model.DayOfMeeting.ToString("dddd, MMMM dd, yyyy");
-    ViewData["LastBuild"] = ViewData.Model.LastBuildTime.ToString("h:mm tt 'PDT' dddd, MMMM dd, yyyy");
+    ViewData["LastBuildDate"] = ViewData.Model.LastBuildTime.ToString("dddd, MMMM dd, yyyy");
+    var abbreviatedTimeZone = string.Join("", ViewData.Model.TimeZoneStandardName.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(x => x[0]).ToArray());
+    ViewData["LastBuildTime"] = $"{ViewData.Model.LastBuildTime.ToString("h:mm tt")} {abbreviatedTimeZone}";
 }
 <div class="meeting-page">
     <div class="meeting-board">
@@ -35,7 +37,8 @@
         </div>
     </div>
     <div class="meeting-info">
-        <div>Website Last Published:</div>
-        <div>@ViewData["LastBuild"]</div>
+        <div>Website Last Published</div>
+        <div>@ViewData["LastBuildDate"]</div>
+        <div>@ViewData["LastBuildTime"]</div>
     </div>
 </div>
