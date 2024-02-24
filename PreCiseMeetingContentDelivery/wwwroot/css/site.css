@@ -25,15 +25,17 @@
 }
 
 body {
-    background: var(--precise-darkblue);
+    height: 100vh;
+    height: 100svh;
+    padding: 2em;
     display: flex;
-    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    margin: 2em;
+    background: var(--precise-darkblue);
 }
 
 .meeting-page {
+    height: 100%;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -46,7 +48,6 @@ body {
 }
 
 .meeting-info {
-    align-self: flex-end;
     color: var(--precise-white);
     background: linear-gradient(to bottom, var(--precise-lightgreen), var(--precise-darkgreen));
     box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
