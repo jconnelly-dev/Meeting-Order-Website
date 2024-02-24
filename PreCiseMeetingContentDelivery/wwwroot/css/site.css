@@ -26,12 +26,11 @@
 
 body {
     background: var(--precise-darkblue);
-    height: 100vh;
-    height: 100svh;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    margin: 2em;
 }
 
 .meeting-page {
@@ -44,7 +43,6 @@ body {
     justify-content: center;
     align-items: center;
     gap: 2em;
-    margin: 0em 2em 2em;
 }
 
 .meeting-info {
@@ -58,7 +56,6 @@ body {
 }
 
 .meeting-board {
-    margin-top: 2em;
     color: var(--precise-white);
     background: linear-gradient(to bottom, var(--precise-lightblue), var(--precise-blue));
     box-shadow: 0 7px 30px rgba(62, 9, 11, .3);
