@@ -10,15 +10,13 @@ namespace PreCiseMeetingContentDelivery.Pages
 {
     public class IndexModel : PageModel
     {
-        #region Properties
+        public static string MeetingTimezone = "Mountain Standard Time";
+
         public List<string> MemberOrder { get; private set; } = [];
         public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
         public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
         public string TimeZoneStandardName { get; private set; } = string.Empty;
-        #endregion
 
-        #region Private Members
-        private const string MEETING_TIMEZONE = "US:Mountain";
         private static readonly string[] _names =
         [
             "andrew becklund",
@@ -46,15 +44,16 @@ namespace PreCiseMeetingContentDelivery.Pages
             "scott surber",
             "zuva donduro"
         ];
-        #endregion
 
         public void OnGet()
         {
             DateTime updateOrderOnUtc = DateTime.UtcNow;
-            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MEETING_TIMEZONE);
+            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MeetingTimezone);
+            DateTime dayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingTimeZone);
+
+            DayOfMeeting = dayOfMeeting;
             LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingTimeZone);
-            DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingTimeZone);
-            TimeZoneStandardName = DayOfMeeting.IsDaylightSavingTime()
+            TimeZoneStandardName = dayOfMeeting.IsDaylightSavingTime()
                 ? meetingTimeZone.DaylightName
                 : meetingTimeZone.StandardName;
 
