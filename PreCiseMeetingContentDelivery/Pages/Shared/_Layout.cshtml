@@ -12,10 +12,6 @@
 </head>
 <body>
     @RenderBody()
-    <footer>
-        <div>Website Last Published:</div>
-        <div>@ViewData["LastBuild"]</div>
-    </footer>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

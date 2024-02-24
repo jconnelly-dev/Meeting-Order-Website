@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
@@ -9,8 +10,16 @@ namespace PreCiseMeetingContentDelivery.Pages
 {
     public class IndexModel : PageModel
     {
-        private static readonly string[] _names = new string[]
-        {
+        #region Properties
+        public List<string> MemberOrder { get; private set; } = [];
+        public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
+        public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
+        #endregion
+
+        #region Private Members
+        private const string MEETING_TIMEZONE = "Mountain Standard Time";
+        private static readonly string[] _names =
+        [
             "andrew becklund",
             "andrew devoe",
             "anthony brother",
@@ -35,39 +44,19 @@ namespace PreCiseMeetingContentDelivery.Pages
             "samuel tew",
             "scott surber",
             "zuva donduro"
-        };
-
-        public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
-        public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
-        public List<string> MemberOrder { get; private set; } = new List<string>();
+        ];
+        #endregion
 
         public void OnGet()
         {
-            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: "Mountain Standard Time");
-            DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, meetingTimeZone);
-            LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingTimeZone);
-            MemberOrder = RandomizeOrder();
-        }
+            DateTime updateOrderOnUtc = DateTime.UtcNow;
+            TimeZoneInfo meetingLocationTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MEETING_TIMEZONE);
 
-        private List<string> RandomizeOrder()
-        {
-            List<string> order = new List<string>();
+            LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingLocationTimeZone);
+            DayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingLocationTimeZone);
 
-            int seed = DateTime.Now.Day;
-            Random rand = new Random(seed);
-            Dictionary<int, string> participants = new Dictionary<int, string>();
-            do
-            {
-                int upNext = rand.Next(0, _names.Length);
-                if (!participants.ContainsKey(upNext))
-                {
-                    participants.Add(upNext, _names[upNext]);
-                    order.Add(_names[upNext]);
-                }
-            }
-            while (participants.Count < _names.Length);
-
-            return order;
+            // Creating separation from page content to aid in future testing.
+            MemberOrder = Randomizer.RandomizeOrder(_names, DayOfMeeting);
         }
 
         //[ResponseCache(Duration = 1200)]
