@@ -4,12 +4,7 @@
     ViewData["Title"] = "RSS Content Source";
     ViewData["DayOfMeeting"] = ViewData.Model.DayOfMeeting.ToString("dddd, MMMM dd, yyyy");
     ViewData["LastBuildDate"] = ViewData.Model.LastBuildTime.ToString("dddd, MMMM dd, yyyy");
-    string abbreviatedTimeZone = string.Join("", ViewData.Model.TimeZoneStandardName.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(x => x[0]).ToArray()).ToUpper();
-    // if (string.IsNullOrEmpty(abbreviatedTimeZone) || abbreviatedTimeZone.Length <= 1)
-    // {
-    //     abbreviatedTimeZone = string.Join("", IndexModel.MeetingTimezone.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(x => x[0]).ToArray()).ToUpper();
-    // }
-    ViewData["LastBuildTime"] = $"{ViewData.Model.LastBuildTime.ToString("h:mm tt")} {abbreviatedTimeZone}";
+    ViewData["LastBuildTime"] = $"{ViewData.Model.LastBuildTime.ToString("h:mm tt")} {ViewData.Model.AbbrivatedTimeZone}";
 }
 <div class="meeting-page">
     <div class="meeting-board">

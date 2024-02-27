@@ -14,6 +14,7 @@ namespace PreCiseMeetingContentDelivery.Pages
         public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
         public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
         public string TimeZoneStandardName { get; private set; } = string.Empty;
+        public string AbbrivatedTimeZone { get; private set; } = string.Empty;
 
         private readonly string[] _names;
         private readonly string _timeZone;
@@ -34,6 +35,7 @@ namespace PreCiseMeetingContentDelivery.Pages
 
             DayOfMeeting = dayOfMeeting;
             LastBuildTime = TimeZoneInfo.ConvertTimeFromUtc(LastAssemblyBuild.Date, meetingTimeZone);
+            AbbrivatedTimeZone = string.Join("", _timeZone.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(x => x[0]).ToArray()).ToUpper();
             TimeZoneStandardName = dayOfMeeting.IsDaylightSavingTime()
                 ? meetingTimeZone.DaylightName
                 : meetingTimeZone.StandardName;
