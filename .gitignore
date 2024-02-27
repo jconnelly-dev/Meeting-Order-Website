@@ -1,7 +1,7 @@
 ####
 ## jconnelly personal ignore tags:
 ##
-*.env
+#*.env
 
 ####
 ## Ignore Visual Studio temporary files, build results, and
