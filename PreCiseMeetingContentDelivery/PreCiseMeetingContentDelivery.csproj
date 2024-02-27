@@ -7,4 +7,10 @@
     <Deterministic>false</Deterministic> <!--to enable PreCiseMeetingContentDelivery.LastAssemblyBuild-->
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="names.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

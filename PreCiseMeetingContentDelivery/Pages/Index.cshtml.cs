@@ -10,45 +10,26 @@ namespace PreCiseMeetingContentDelivery.Pages
 {
     public class IndexModel : PageModel
     {
-        public static string MeetingTimezone = "Mountain Standard Time";
-
         public List<string> MemberOrder { get; private set; } = [];
         public DateTime DayOfMeeting { get; private set; } = DateTime.MinValue;
         public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
         public string TimeZoneStandardName { get; private set; } = string.Empty;
 
-        private static readonly string[] _names =
-        [
-            "andrew becklund",
-            "andrew devoe",
-            "anthony brother",
-            "bob lowe",
-            "camilla hoke",
-            "darin macfarland",
-            "dave carter",
-            "dave heil",
-            "emily sullivan",
-            "jacob hays",
-            "jay florey",
-            "jay wendt",
-            "jesse li",
-            "joey connelly",
-            "kellynn harder",
-            "logan warner",
-            "michael schlag",
-            "michael travis",
-            "nick kelly",
-            "rhett harman",
-            "ryan hansel",
-            "samuel tew",
-            "scott surber",
-            "zuva donduro"
-        ];
+        private readonly string[] _names;
+        private readonly string _timeZone;
+        private readonly IMeetingInfo _datastore;
+
+        public IndexModel(IMeetingInfo meetingMembers)
+        {
+            _datastore = meetingMembers ?? throw new ArgumentNullException(nameof(meetingMembers));
+            _names = _datastore.GetFullNames();
+            _timeZone = _datastore.GetMeetingTimeZone();
+        }
 
         public void OnGet()
         {
             DateTime updateOrderOnUtc = DateTime.UtcNow;
-            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: MeetingTimezone);
+            TimeZoneInfo meetingTimeZone = TimeZoneInfo.FindSystemTimeZoneById(id: _timeZone);
             DateTime dayOfMeeting = TimeZoneInfo.ConvertTimeFromUtc(updateOrderOnUtc, meetingTimeZone);
 
             DayOfMeeting = dayOfMeeting;
