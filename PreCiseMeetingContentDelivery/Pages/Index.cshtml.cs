@@ -15,6 +15,7 @@ namespace PreCiseMeetingContentDelivery.Pages
         public DateTime LastBuildTime { get; private set; } = DateTime.MinValue;
         public string TimeZoneStandardName { get; private set; } = string.Empty;
         public string AbbrivatedTimeZone { get; private set; } = string.Empty;
+        public string MeetingTitle { get; init; } = "PreCiseMRM";
 
         private readonly string[] _names;
         private readonly string _timeZone;

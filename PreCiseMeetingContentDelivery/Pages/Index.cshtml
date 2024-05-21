@@ -6,6 +6,7 @@
     ViewData["LastBuildDate"] = ViewData.Model.LastBuildTime.ToString("dddd, MMMM dd, yyyy");
     ViewData["LastBuildTime"] = $"{ViewData.Model.LastBuildTime.ToString("h:mm tt")} {ViewData.Model.AbbrivatedTimeZone}";
 }
+
 <div class="meeting-page">
     <div class="meeting-board">
         <div class="meeting-header">
@@ -23,7 +24,7 @@
                     <path class="pin" d="M24,0A24,24,0,0,0,0,24C0,37.25,20,72,24,72S48,37.25,48,24A24,24,0,0,0,24,0Zm0,33a9,9,0,1,1,9-9A9,9,0,0,1,24,33Z" />
                 </g>
             </svg>
-            <span>Start Meeting</span>
+            <span>@ViewData.Model.MeetingTitle</span>
             <div class="meeting-date">@ViewData["DayOfMeeting"]</div>
         </div>
         <div class="meeting-list">
@@ -34,6 +35,10 @@
                 }
             </ul>
         </div>
+        <button class="meeting-button" onclick="MoveCheckedState('@ViewData["DayOfMeeting"]', '@string.Join("|", ViewData.Model.MemberOrder)');">
+            <i id="cdn-icon" class="icon fa fa-copy"></i>
+            <span class="share-info">Copy</span>
+        </button>
     </div>
     <div class="meeting-info">
         <div>Website Last Published</div>
@@ -41,3 +46,29 @@
         <div>@ViewData["LastBuildTime"]</div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function MoveCheckedState(dateTime, attendees) {
+            let iconElement = document.getElementById('cdn-icon');
+            if (iconElement != null) {
+                iconElement.classList.remove('fa-copy');
+                ClipboardInsert(dateTime, attendees);
+                iconElement.classList.add('fa-check');
+            }
+        }
+        function ClipboardInsert(dateTime, attendees) {
+            let copiedText = "--- START MEETING ---";
+            if (dateTime != null) {
+                copiedText += "\n--- " + dateTime + " ---";
+                let attendeesArray = attendees?.split("|");
+                if (attendeesArray != null && attendeesArray.length > 0) {
+                    attendeesArray.forEach((attendee, index) => {
+                        copiedText += "\n[" + index + "] " + attendee
+                    });
+                }
+                navigator.clipboard.writeText(copiedText);
+            }
+        }
+    </script>
+}

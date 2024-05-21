@@ -83,7 +83,6 @@ body {
     height: 1.5em;
     position: relative;
     vertical-align: baseline;
-    margin-right: 0.2em;
 }
 
 .pin {
@@ -115,6 +114,42 @@ body {
     width: 1.5em;
     height: 1.5em;
     line-height: 1.6em;
+}
+
+.meeting-button {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: black;
+    text-shadow: 1px 1px 1px lightgrey;
+    text-align: center;
+    text-decoration: none;
+
+    background-color: lightgray;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.meeting-button:hover {
+    background-color: gray;
+    text-shadow: none;
+}
+
+.meeting-button:active {
+    background-color: var(--precise-green);
+}
+
+.meeting-button:focus {
+    background-color: var(--precise-green);
+}
+
+.share-info {
+    margin-left: 1ch;
 }
 
 @media (prefers-reduced-motion: no-preference) {
